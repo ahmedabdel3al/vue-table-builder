@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click.prevent="exportExcel">
+  <a href="#" @click.prevent="exportExcel" class="vtb__column__field vtb__column__field--action">
     <i class="fas fa-file-excel"></i>
   </a>
 </template>
@@ -9,15 +9,15 @@ import { EventBus } from "../event-bus";
 export default {
   props: {
     url: {
-      required: true
+      required: true,
     },
     ids: {
       required: false,
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
   mounted() {
     EventBus.$on("server-params", ({ serverParams }) => {
@@ -33,7 +33,7 @@ export default {
         showCancelButton: true,
         focusConfirm: false,
         confirmButtonText: "Only Selected",
-        cancelButtonText: "All Matched"
+        cancelButtonText: "All Matched",
       });
 
       if (result.dismiss == "close") {
@@ -51,9 +51,9 @@ export default {
         axios
           .get(url, {
             params,
-            responseType: "blob" // important
+            responseType: "blob", // important
           })
-          .then(response => {
+          .then((response) => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
@@ -62,12 +62,12 @@ export default {
             link.click();
             resolve(response.data);
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

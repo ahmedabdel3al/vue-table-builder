@@ -1,5 +1,9 @@
 <template>
-  <a :href="url">{{model[column.field]}}</a>
+  <a
+    :href="url"
+    class="vtb__column__field vtb__column__field--link"
+    rel="noopener"
+  >{{model[column.field]}}</a>
 </template>
 
 <script>
@@ -7,16 +11,16 @@ export default {
   props: {
     model: {
       required: true,
-      type: Object
+      type: Object,
     },
     column: {
       required: true,
-      type: Object
+      type: Object,
     },
     attributes: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   computed: {
     url() {
@@ -27,10 +31,10 @@ export default {
         );
       }
       return this.attributes.url;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <a :href="url">
+  <a :href="url" class="vtb__column__field vtb__column__field--action">
     <i class="fa fa-eye"></i>
   </a>
 </template>
@@ -8,9 +8,9 @@
 export default {
   props: {
     url: {
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

@@ -4,6 +4,7 @@
     :alt="alt"
     :width="attributes.width ? attributes.width : 50"
     :height="attributes.height ? attributes.height : 50"
+    class="vtb__column__field vtb__column__field--img"
   />
 </template>
 
@@ -12,16 +13,16 @@ export default {
   props: {
     model: {
       required: true,
-      type: Object
+      type: Object,
     },
     column: {
       required: true,
-      type: Object
+      type: Object,
     },
     attributes: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   computed: {
     alt() {
@@ -29,8 +30,8 @@ export default {
         return this.model[this.attributes.altKey];
       }
       return "alt";
-    }
-  }
+    },
+  },
 };
 </script>
 

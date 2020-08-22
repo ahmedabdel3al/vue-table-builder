@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app" class="vtb">
+    <!-- todo : add theme attribute to the vue good table :ex =>  theme="black-rhino" -->
     <vue-good-table
       ref="my-table"
       :columns="columns"
@@ -52,48 +53,48 @@ export default {
     actions,
     DynamicComponent,
     ActionGroup,
-    VueGoodTable
+    VueGoodTable,
   },
   props: {
     tableOptions: {
       required: true,
-      type: Object
+      type: Object,
     },
     paginationOptions: {
       required: false,
       type: Object,
-      default: function() {
+      default: function () {
         return this.tableOptions.paginationOptions;
-      }
+      },
     },
     fixedHeader: {
       required: false,
       type: Boolean,
-      default: function() {
+      default: function () {
         return this.tableOptions.fixedHeader;
-      }
+      },
     },
     rtl: {
       required: false,
       type: Boolean,
-      default: function() {
+      default: function () {
         return this.tableOptions.rtl;
-      }
+      },
     },
     lineNumbers: {
       required: false,
       type: Boolean,
-      default: function() {
+      default: function () {
         return this.tableOptions.lineNumbers;
-      }
+      },
     },
     selectOptions: {
       required: false,
       type: Object,
-      default: function() {
+      default: function () {
         return this.tableOptions.selectOptions;
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -101,17 +102,17 @@ export default {
       totalRecords: 0,
       serverParams: {
         page: 1,
-        per_page: this.tableOptions.paginationOptions.perPage || 20
+        per_page: this.tableOptions.paginationOptions.perPage || 20,
       },
       rows: [],
       columns: [],
-      selectedRows: []
+      selectedRows: [],
     };
   },
   mounted() {
     EventBus.$on("good-table-get-server-params", () => {
       EventBus.$emit("server-params", {
-        serverParams: this.serverParams
+        serverParams: this.serverParams,
       });
     });
     this.setTableOptions();
@@ -140,7 +141,7 @@ export default {
       let query =
         "?" +
         Object.keys(queryString)
-          .map(key => {
+          .map((key) => {
             return key + "=" + queryString[key];
           })
           .join("&");
@@ -155,7 +156,7 @@ export default {
     onPerPageChange(params) {
       this.updateParams({
         per_page: params.currentPerPage,
-        page: 1
+        page: 1,
       });
       this.loadItems();
     },
@@ -165,7 +166,7 @@ export default {
       const type = params[0].type;
       this.updateParams({
         sort: field,
-        type: type
+        type: type,
       });
       this.loadItems();
     },
@@ -175,7 +176,7 @@ export default {
         for (let filter in params.columnFilters) {
           this.updateParams({
             page: 1,
-            [`filter[${filter}]`]: params.columnFilters[filter]
+            [`filter[${filter}]`]: params.columnFilters[filter],
           });
         }
         this.loadItems();
@@ -184,7 +185,7 @@ export default {
     // load items is what brings back the rows from server
     loadItems() {
       this.getFromServer(this.tableOptions.fetchUrl, this.serverParams).then(
-        response => {
+        (response) => {
           this.totalRecords = this.tableOptions.paginationEnabled
             ? response.meta.total
             : response.data.length;
@@ -199,12 +200,12 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(url, {
-            params: serverParams
+            params: serverParams,
           })
-          .then(response => {
+          .then((response) => {
             resolve(response.data);
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
       });
@@ -217,16 +218,95 @@ export default {
       }
     },
     removeFilter() {
-      this.columns = this.columns.map(item => {
+      this.columns = this.columns.map((item) => {
         return { ...item, filterValue: "" };
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-.m-b-20 {
-  margin-bottom: 30px;
+<style lang="scss" >
+//global styles
+$main__color: #606266;
+$anchor__hoverer: #cfd3e0;
+$table__width: 100%;
+//  modules
+%vtb__input {
+  color: $main__color;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    color: $anchor__hoverer;
+  }
+}
+
+//  customization
+.vtb {
+  .vgt-table.bordered * {
+    vertical-align: middle;
+    box-shadow: none;
+  }
+  table.vgt-table {
+    width: $table__width;
+    td {
+      color: $main__color;
+    }
+  }
+  &__column__field {
+    //
+
+    &--link {
+      @extend %vtb__input;
+    }
+    &--actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    &--action {
+      margin: 10px;
+      @extend %vtb__input;
+    }
+    &--img {
+      //
+    }
+    &--toggle_btn {
+      input {
+        &[type="checkbox"] {
+          cursor: pointer;
+          background: $anchor__hoverer;
+          &:before {
+            background: $main__color;
+            box-shadow: none;
+          }
+        }
+        &:checked {
+          &[type="checkbox"] {
+            background: $main__color;
+            &:before {
+              background: $main__color;
+              box-shadow: 0px 0px 2px 0px black;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__extras {
+    &--tooltip {
+      //
+    }
+    .vgt-wrap__footer .footer__navigation__page-btn .chevron {
+      &.right::after {
+        border-left: 6px solid $main__color;
+      }
+      &.left::after {
+        border-right: 6px solid $main__color;
+      }
+    }
+  }
 }
 </style>

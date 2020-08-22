@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vtb__column__field vtb__column__field--actions">
     <span v-for="(component,i) in actions" :key="i">
       <component
         :is="component.name"
@@ -17,23 +17,23 @@ export default {
   methods: {
     makeUrlValid({ url, key, value }, actionName) {
       return url.replace(key, this.model[value]);
-    }
+    },
   },
   components: {
     edit,
     show,
-    destroy
+    destroy,
   },
   props: {
     actions: {
       required: true,
-      type: Array
+      type: Array,
     },
     model: {
       required: true,
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
 };
 </script>
 

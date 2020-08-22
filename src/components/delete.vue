@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click.prevent="remove">
+  <a href="#" @click.prevent="remove" class="vtb__column__field vtb__column__field--action">
     <i class="fas fa-trash-alt"></i>
   </a>
 </template>
@@ -8,15 +8,15 @@
 export default {
   props: {
     url: {
-      required: true
+      required: true,
     },
     ids: {
       required: false,
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
   methods: {
     async remove() {
@@ -26,7 +26,7 @@ export default {
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33"
+        cancelButtonColor: "#d33",
       });
       if (!swal.value) {
         return;
@@ -44,8 +44,8 @@ export default {
       }
       //success message
       this.$swal("Deleted!", "Your file has been deleted.", "success");
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,7 +1,6 @@
 import TableBuilder from './TableBuilder.vue'
 import "sweetalert2/dist/sweetalert2.min.css";
 import VueSweetalert2 from "vue-sweetalert2";
-import "bootstrap/scss/bootstrap.scss";
 
 
 

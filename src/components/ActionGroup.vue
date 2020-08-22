@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vtb__column__field vtb__column__field--actions">
     <span v-for="(component,i) in groups" :key="i">
       <component :is="component.name" v-bind="{...component}" :ids="calcualteIds(component)" />
     </span>
@@ -19,12 +19,12 @@ export default {
       type: Array,
       default: () => {
         return [];
-      }
+      },
     },
     groups: {
       required: true,
-      type: Array
-    }
+      type: Array,
+    },
   },
   methods: {
     calcualteIds(component) {
@@ -33,14 +33,14 @@ export default {
       let selected = _.map(this.selectedRows, component.value);
 
       return { [component.value]: selected };
-    }
+    },
   },
   components: {
     edit,
     show,
     destroy,
-    excel
-  }
+    excel,
+  },
 };
 </script>
 

@@ -1,31 +1,35 @@
 <template>
-  <toggle-button @input="onChangeEventHandler" v-model="toggled" />
+  <toggle-button
+    @input="onChangeEventHandler"
+    v-model="toggled"
+    class="vtb__column__field vtb__column__field--toggle_btn"
+  />
 </template>
 
 <script>
 import ToggleButton from "./sub/ToggleButton";
 export default {
   components: {
-    ToggleButton
+    ToggleButton,
   },
   data() {
     return {
-      toggled: Boolean(this.model[this.column.field])
+      toggled: Boolean(this.model[this.column.field]),
     };
   },
   props: {
     model: {
       required: true,
-      type: Object
+      type: Object,
     },
     column: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   methods: {
-    onChangeEventHandler() {}
-  }
+    onChangeEventHandler() {},
+  },
 };
 </script>
 
