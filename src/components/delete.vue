@@ -1,11 +1,15 @@
 <template>
   <a href="#" @click.prevent="remove" class="vtb__column__field vtb__column__field--action">
-    <i class="fas fa-trash-alt"></i>
+    <tool-tip text="Delete">
+      <i class="fas fa-trash-alt"></i>
+    </tool-tip>
   </a>
 </template>
 
 <script>
+import toolTip from "./sub/ToolTip";
 export default {
+  components: { toolTip },
   props: {
     url: {
       required: true,

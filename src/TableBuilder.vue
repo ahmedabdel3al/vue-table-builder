@@ -264,9 +264,10 @@ $table__width: 100%;
       align-items: center;
       justify-content: center;
       text-align: center;
+      margin: 0 !important;
     }
     &--action {
-      margin: 10px;
+      // margin: 10px;
       @extend %vtb__input;
     }
     &--img {
@@ -297,16 +298,16 @@ $table__width: 100%;
 
   &__extras {
     &--tooltip {
-      //
+      margin: 0 5px;
     }
-    .vgt-wrap__footer .footer__navigation__page-btn .chevron {
-      &.right::after {
-        border-left: 6px solid $main__color;
-      }
-      &.left::after {
-        border-right: 6px solid $main__color;
-      }
-    }
+  }
+}
+.vgt-wrap__footer .footer__navigation__page-btn .chevron {
+  &.right::after {
+    border-left: 6px solid $main__color;
+  }
+  &.left::after {
+    border-right: 6px solid $main__color;
   }
 }
 </style>
